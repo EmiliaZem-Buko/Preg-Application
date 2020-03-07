@@ -20,22 +20,26 @@ medicinButton.addEventListener("click", () => {
     const newDiv = document.createElement("div");
     newDiv.classList.add("row", "rowMedic");
     newDiv.innerHTML = `<div class="col-7">
-                            <th scope="col"><input type="text" class="input-field"></th>
+                            <th scope="col"><input type="text" id="input" class="input-field"></th>
                         </div>
                         <div class="col-1">
                             <th scope="col"><input type="button" class="remove-button" value="-"></th>
                         </div>
                         <div class="col-2">
-                            <th scope="col"><input type="number" class="input-field-short"></th>
+                            <th scope="col"><input type="number" id="input" class="input-field-short expected-cost"></th>
                         </div>
                         <div class="col-2">
-                            <th scope="col"><input type="number" class="input-field-short"></th>
+                            <th scope="col"><input type="number" id="input" class="input-field-short real-cost"></th>
                         </div>`;
 
     newDiv.querySelector(".remove-button").addEventListener("click", removeRow);
 
+    newDiv.querySelectorAll(".input-field-short")[0].addEventListener("change", computeSum);
+    newDiv.querySelectorAll(".input-field-short")[1].addEventListener("change", computeSum);
+
     medicinContainer.querySelector("div:first-child").appendChild(newDiv);
 });
+
 
 // Dodawanie i usuwanie do ubranek 
 
@@ -46,19 +50,23 @@ clothesButton.addEventListener("click", () => {
     const newDiv = document.createElement("div");
     newDiv.classList.add("row");
     newDiv.innerHTML = `<div class="col-7">
-                        <th scope="col"><input type="text" class="input-field"></th>
+                        <th scope="col"><input type="text" id="input" class="input-field"></th>
                     </div>
                     <div class="col-1">
                         <th scope="col"><input type="button" class="remove-button" value="-"></th>
                     </div>
                     <div class="col-2">
-                        <th scope="col"><input type="number" class="input-field-short"></th>
+                        <th scope="col"><input type="number" id="input" class="input-field-short expected-cost"></th>
                     </div>
                     <div class="col-2">
-                        <th scope="col"><input type="number" class="input-field-short"></th>
+                        <th scope="col"><input type="number" id="input" class="input-field-short real-cost"></th>
                     </div>`;
 
     newDiv.querySelector(".remove-button").addEventListener("click", removeRow);
+
+    newDiv.querySelectorAll(".input-field-short")[0].addEventListener("change", computeSum);
+    newDiv.querySelectorAll(".input-field-short")[1].addEventListener("change", computeSum);
+
 
     clothesContainer.querySelector("div:first-child").appendChild(newDiv);
 });
@@ -79,21 +87,56 @@ accessoriesButton.addEventListener("click", () => {
     const newDiv = document.createElement("div");
     newDiv.classList.add("row");
     newDiv.innerHTML = `<div class="col-7">
-                        <th scope="col"><input type="text" class="input-field"></th>
+                        <th scope="col"><input type="text" id="input" class="input-field"></th>
                     </div>
                     <div class="col-1">
                         <th scope="col"><input type="button" class="remove-button" value="-"></th>
                     </div>
                     <div class="col-2">
-                        <th scope="col"><input type="number" class="input-field-short"></th>
+                        <th scope="col"><input type="number" id="input" class="input-field-short expected-cost"></th>
                     </div>
                     <div class="col-2">
-                        <th scope="col"><input type="number" class="input-field-short"></th>
+                        <th scope="col"><input type="number" id="input" class="input-field-short real-cost"></th>
                     </div>`;
 
     newDiv.querySelector(".remove-button").addEventListener("click", removeRow);
 
+    newDiv.querySelectorAll(".input-field-short")[0].addEventListener("change", computeSum);
+    newDiv.querySelectorAll(".input-field-short")[1].addEventListener("change", computeSum);
+
+
     accessoriesContainer.querySelector("div:first-child").appendChild(newDiv);
+});
+
+
+// Dodawanie i usuwanie do ForMama
+
+const forMamaContainer = document.querySelector(".forMama");
+const forMamaButton = document.querySelector(".forMama .add-button");
+
+forMamaButton.addEventListener("click", () => {
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("row");
+    newDiv.innerHTML = `<div class="col-7">
+                        <th scope="col"><input type="text" id="input" class="input-field"></th>
+                    </div>
+                    <div class="col-1">
+                        <th scope="col"><input type="button" class="remove-button" value="-"></th>
+                    </div>
+                    <div class="col-2">
+                        <th scope="col"><input type="number" id="input" class="input-field-short expected-cost"></th>
+                    </div>
+                    <div class="col-2">
+                        <th scope="col"><input type="number" id="input" class="input-field-short real-cost"></th>
+                    </div>`;
+
+    newDiv.querySelector(".remove-button").addEventListener("click", removeRow);
+
+    newDiv.querySelectorAll(".input-field-short")[0].addEventListener("change", computeSum);
+    newDiv.querySelectorAll(".input-field-short")[1].addEventListener("change", computeSum);
+
+
+    forMamaContainer.querySelector("div:first-child").appendChild(newDiv);
 });
 
 
@@ -109,8 +152,9 @@ $(document).ready(function () {
 
 // Funkcja liczaca sume osobno z lewych i prawych pol (klasy).
 
-function computeSum() {       
+function computeSum() {
     let sum = 0;
+
 
     if (this.classList.contains("expected-cost")) { // Suma lewych pol.
         $(".expected-cost").each(function (e) {
@@ -137,9 +181,9 @@ function computeSum() {
 }
 
 
- // Dodanie funcji nasluchujacej do kazdego krotkiego pola.
+// Dodanie funcji nasluchujacej do kazdego krotkiego pola.
 
 
-$(document).ready(function () {     
+$(document).ready(function () {
     $(".input-field-short").change(computeSum);
 });
